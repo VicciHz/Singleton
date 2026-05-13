@@ -1,0 +1,13 @@
+services:
+  db:
+    image: postgres:18
+    container_name: singleton-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: singleton_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./singleton_db_data:/var/lib/postgresql:z
+      - ./Database/init.sql:/docker-entrypoint-initdb.d/init.sql:z
