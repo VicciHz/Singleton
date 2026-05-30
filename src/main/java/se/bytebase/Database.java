@@ -1,28 +1,21 @@
 package se.bytebase;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public final class Database {
-  private static volatile Database instance;
-  private Connection connection;
+  public Connection connection;
 
-  private Database(String url, String user, String pass) {
+  public Database(String url, String user, String pass) {
     try {
       this.connection = DriverManager.getConnection(url, user, pass);
     } catch (SQLException e) {
       throw new RuntimeException("Database connection failed", e);
     }
-  }
-
-  public static Database getInstance(String url, String user, String pass) {
-    if (instance == null) {
-      synchronized (Database.class) {
-        if (instance == null) {
-          instance = new Database(url, user, pass);
-        }
-      }
-    }
-    return instance;
   }
 
   public void registerUser(String username, String email) {
