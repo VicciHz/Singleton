@@ -1,7 +1,5 @@
 package se.bytebase;
 
-import java.util.Scanner;
-
 public class Main {
   public static void main(String[] args) {
     String url = "jdbc:postgresql://localhost:5432/singleton_db";
